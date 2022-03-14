@@ -3,16 +3,16 @@ package ru.netology.domain;
 public class Product {
     private int id;
     private String name;
-    private int count;
+    private int price;
 
     public Product() {
 
     }
 
-    public Product(int id, String name, int count) {
+    public Product(int id, String name, int price) {
         this.id = id;
         this.name = name;
-        this.count = count;
+        this.price = price;
     }
 
     public int getId() {
@@ -31,12 +31,12 @@ public class Product {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public int getprice() {
+        return price;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setprice(int price) {
+        this.price = price;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", count=" + count +
+                ", price=" + price +
                 '}';
     }
 }

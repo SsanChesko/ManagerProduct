@@ -20,6 +20,7 @@ class ProductManagerTest {
     Smartphone iPhone = new Smartphone(22, "IPhone XR", 50000, "China");
     Smartphone xiaomi = new Smartphone(3, "Xiaomi RedMi 5", 18800, "China");
     Smartphone honor = new Smartphone(4, "Honor 1", 9000, "Russia");
+    Smartphone iPhone1 = new Smartphone(88, "IPhone XR", 66666, "China" );
 
     @Test
     void shouldTestAddManager() {
@@ -36,7 +37,26 @@ class ProductManagerTest {
     }
 
     @Test
-    void shouldTestAddManagerOneThing() {
+    void shouldTestAddManagerAllThing() {
+        productManager.add(howLongMyLife);
+        productManager.add(markul);
+        productManager.add(harryPotter);
+        productManager.add(farytale);
+        productManager.add(alcatel);
+        productManager.add(nokia);
+        productManager.add(iPhone);
+        productManager.add(xiaomi);
+        productManager.add(honor);
+
+        Product[] expected = new Product[]{howLongMyLife, markul, harryPotter, farytale, alcatel, nokia, iPhone, xiaomi, honor};
+        Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    void shouldTestAddManagerOneThings() {
         productManager.add(iPhone);
 
         Product[] expected = new Product[]{iPhone};
@@ -49,6 +69,17 @@ class ProductManagerTest {
     @Test
     void searchByBook() {
         productManager.add(markul);
+
+        Product[] expected = new Product[]{markul};
+        Product[] actual = productManager.searchBy("Track list");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void searchByBooks() {
+        productManager.add(markul);
+        productManager.add(howLongMyLife);
 
         Product[] expected = new Product[]{markul};
         Product[] actual = productManager.searchBy("Track list");
@@ -83,6 +114,19 @@ class ProductManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void shouldSearchSmartphonesWithSameNames() {
+        productManager.add(iPhone);
+        productManager.add(iPhone1);
+
+        Product[] expected = new Product[] {iPhone, iPhone1};
+        Product[] actual = productManager.searchBy("IPhone");
+
+        assertArrayEquals(expected, actual);
+    }
+
+
 
 //    @Test
 //    void searchByBooks() {
