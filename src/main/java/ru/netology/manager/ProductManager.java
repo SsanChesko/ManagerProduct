@@ -42,4 +42,23 @@ public class ProductManager {
         // return product.getName().contains(search);
     }
 
+    @Override
+    public String toString() {
+        return "ProductManager{" +
+                "repository=" + repository +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductManager that = (ProductManager) o;
+        return Objects.equals(repository, that.repository);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(repository);
+    }
 }

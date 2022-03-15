@@ -39,4 +39,17 @@ public class ProductRepository {
                 "items=" + Arrays.toString(items) +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductRepository that = (ProductRepository) o;
+        return Arrays.equals(items, that.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(items);
+    }
 }

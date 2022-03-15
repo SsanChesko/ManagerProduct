@@ -42,7 +42,8 @@ class ProductRepositoryTest {
         repository.save(nokia);
         repository.save(nokia);
         repository.save(xiaomi);
-        Product[] expected = new Smartphone[]{iPhone, nokia, nokia, xiaomi};
+        repository.save(alcatel);
+        Product[] expected = new Smartphone[]{iPhone, nokia, nokia, xiaomi, alcatel};
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
@@ -90,6 +91,8 @@ class ProductRepositoryTest {
 
         Product[] expected = new Product[] {howLongMyLife};
         Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -105,6 +108,8 @@ class ProductRepositoryTest {
 
         Product[] expected = new Product[] {harryPotter, honor};
         Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
     }
 
 }

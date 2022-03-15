@@ -1,5 +1,7 @@
 package ru.netology.domain;
 
+import java.util.Objects;
+
 public class Smartphone extends Product {
     private String manufacturer;
 
@@ -25,5 +27,18 @@ public class Smartphone extends Product {
         return "Smartphone{" +
                 "manufacturer='" + manufacturer + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Smartphone that = (Smartphone) o;
+        return Objects.equals(manufacturer, that.manufacturer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(manufacturer);
     }
 }
