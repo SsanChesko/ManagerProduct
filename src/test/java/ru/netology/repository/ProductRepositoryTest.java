@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
+import ru.netology.exception.NotFoundException;
 import ru.netology.manager.ProductManager;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,7 +21,6 @@ class ProductRepositoryTest {
     Smartphone iPhone = new Smartphone(22, "IPhone XR", 50000, "China");
     Smartphone xiaomi = new Smartphone(3, "Xiaomi RedMi 5", 18800, "China");
     Smartphone honor = new Smartphone(4, "Honor 1", 9000, "Russia");
-
 
 
     @Test
@@ -82,21 +82,21 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void shouldRemoveByIdBooks () {
+    void shouldRemoveByIdBooks() {
 
         repository.save(howLongMyLife);
         repository.save(harryPotter);
 
         repository.removeById(12);
 
-        Product[] expected = new Product[] {howLongMyLife};
+        Product[] expected = new Product[]{howLongMyLife};
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldRemoveByIdBooksAndSmartphones () {
+    void shouldRemoveByIdBooksAndSmartphones() {
 
         repository.save(howLongMyLife);
         repository.save(harryPotter);
@@ -106,10 +106,32 @@ class ProductRepositoryTest {
         repository.removeById(10);
         repository.removeById(3);
 
-        Product[] expected = new Product[] {harryPotter, honor};
+        Product[] expected = new Product[]{harryPotter, honor};
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
     }
 
+    @Test
+    void shouldRemoveByIdWithExc() {
+
+        repository.save(xiaomi);
+        repository.save(iPhone);
+
+        assertThrows(NotFoundException.class, () -> repository.removeById(100));
+
+    }
+
+    @Test
+    void shouldAddWithAlreadyIdExc() {
+
+        Smartphone noklla = new Smartphone(1, "Noklla 2220", 1000, "Mexico");
+        repository.save(nokia);
+        repository.save(noklla);
+
+        Product[] expected = new Product[]{nokia, noklla};
+        Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
 }
